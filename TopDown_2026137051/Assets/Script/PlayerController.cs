@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -78,5 +78,25 @@ public class PlayerController : MonoBehaviour
         frameIndex = 0;
         timer = 0f;
         sr.sprite = currentSprites[frameIndex];
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("Finish");
+            SceneManager.LoadScene("Crafting");
+        }
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            Debug.Log("item");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Respawn"))
+        {
+            Debug.Log("enemy");
+        }
     }
 }
