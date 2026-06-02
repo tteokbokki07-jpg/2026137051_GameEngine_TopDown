@@ -177,4 +177,8 @@ public class PlayerController : MonoBehaviour
         isDash = false;
         moveSpeed = normalSpeed;
     }
+    public void GoStage()
+    {
+        SceneManager.LoadScene("Play_1");
+    }
 }
