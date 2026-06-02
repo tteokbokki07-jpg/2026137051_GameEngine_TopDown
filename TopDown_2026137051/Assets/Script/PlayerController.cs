@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,18 @@ public class PlayerController : MonoBehaviour
     public Sprite[] spriteLeft;
     public Sprite[] spriteRight;
     public float frameTime = 0.15f;
+    public float PickupItem = 0f;
+
+    public bool canMove = true;
+    private bool isRespawning = false;
+    public Transform Respawnpoint;
+
+    public float respawnRotationSpeed = 360f; // Respawn 중 Z축 회전 속도(도/초)
+
+    public bool isDash;
+    public float dashSpeed = 1.75f;
+    public float normalSpeed = 0.75f;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Vector2 input;
@@ -27,6 +40,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        // canMove가 true일 때만 입력을 처리하고, 아닐 경우 입력/속도를 0으로 유지
+        if (!canMove)
+        {
+            input = Vector2.zero;
+            velocity = Vector2.zero;
+            return;
+        }
+
         input = value.Get<Vector2>();
         velocity = input.normalized * moveSpeed;
         if (input.sqrMagnitude > 0.01f)
@@ -65,6 +86,16 @@ public class PlayerController : MonoBehaviour
                 frameIndex = 0;
             sr.sprite = currentSprites[frameIndex];
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isDash = true;
+            moveSpeed = dashSpeed;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isDash = false;
+            moveSpeed = normalSpeed;
+        }
     }
     private void FixedUpdate()
     {
@@ -91,12 +122,59 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Item"))
         {
             Debug.Log("item");
+            PickupItem += 1f;
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Respawn"))
         {
-            Debug.Log("enemy");
+            Debug.Log("Respawn trigger entered");
+            if (!isRespawning)
+                StartCoroutine(RespawnCoroutine());
         }
+    }
+
+    private System.Collections.IEnumerator RespawnCoroutine()
+    {
+        if (Respawnpoint == null)
+        {
+            Debug.LogWarning("Respawnpoint이 할당되지 않았습니다.");
+            yield break;
+        }
+
+        isRespawning = true;
+        canMove = false;
+
+        // 현재 회전을 저장(나중에 복원)
+        Quaternion originalRotation = transform.rotation;
+
+        // 0.5초 동안 매 프레임 Z축으로 회전
+        float elapsed = 0f;
+        float waitTime = 0.5f;
+        while (elapsed < waitTime)
+        {
+            float dt = Time.deltaTime;
+            elapsed += dt;
+            transform.Rotate(0f, 0f, respawnRotationSpeed * dt);
+            yield return null;
+        }
+
+        // 위치 강제 이동 및 물리 상태 초기화
+        Vector2 respawnPos = Respawnpoint.position;
+        rb.position = respawnPos;
+        rb.linearVelocity = Vector2.zero;
+        transform.position = respawnPos;
+
+        // 입력/이동 벡터 초기화
+        input = Vector2.zero;
+        velocity = Vector2.zero;
+
+        // 회전 원상복구
+        transform.rotation = originalRotation;
+
+        isRespawning = false;
+        canMove = true;
+        isDash = false;
+        moveSpeed = normalSpeed;
     }
 }
