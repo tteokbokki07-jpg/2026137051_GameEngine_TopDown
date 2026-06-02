@@ -1209,7 +1209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -560, y: 130}
+  m_AnchoredPosition: {x: -560, y: 129.99994}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &241886311
@@ -2287,23 +2287,35 @@ MonoBehaviour:
     material3ID: 0
     resultID: 14
     resultCount: 1
+  - recipeName: "\uC560\uD50C\uC790\uBABD \uC640\uD50C"
+    material1ID: 1
+    material2ID: 3
+    material3ID: 3
+    resultID: 15
+    resultCount: 1
+  - recipeName: "\uB354\uD50C\uC560\uD50C\uBABD \uC640\uD50C"
+    material1ID: 1
+    material2ID: 1
+    material3ID: 3
+    resultID: 16
+    resultCount: 1
   - recipeName: "\uC2A4\uD2B8\uB85C\uD478\uB974\uCE20 \uC640\uD50C"
     material1ID: 2
     material2ID: 3
     material3ID: 0
-    resultID: 15
+    resultID: 17
     resultCount: 1
   - recipeName: "\uBCA0\uB9AC\uBABD\uBCA0 \uC640\uD50C"
     material1ID: 2
     material2ID: 2
     material3ID: 3
-    resultID: 16
+    resultID: 18
     resultCount: 1
   - recipeName: "\uC790\uBABD\uB538\uBABD \uC640\uD50C"
     material1ID: 3
     material2ID: 2
     material3ID: 3
-    resultID: 17
+    resultID: 19
     resultCount: 1
 --- !u!114 &800347221
 MonoBehaviour:
@@ -5002,7 +5014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -408}
+  m_AnchoredPosition: {x: 0, y: -427}
   m_SizeDelta: {x: 450, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1432545343
@@ -6211,7 +6223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 130}
+  m_AnchoredPosition: {x: 0, y: 129.99994}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1748183994
@@ -6758,7 +6770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 560, y: 130}
+  m_AnchoredPosition: {x: 560, y: 129.99994}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810935390

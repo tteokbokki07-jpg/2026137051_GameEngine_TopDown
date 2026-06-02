@@ -42,7 +42,7 @@ public class TestCraftManager : MonoBehaviour
 
             if (match)
             {
-                string msg = "제작 성공!  레시피 : " + recipe.recipeName + "  결과물 ID : " + recipe.resultID + "  획득 개수 : " + recipe.resultCount;
+                string msg = "제작 성공!  레시피 : " + recipe.recipeName + "\n  결과물 ID : " + recipe.resultID + "  획득 개수 : " + recipe.resultCount;
                 Debug.Log(msg);
                 if (TestResultText != null) TestResultText.text = msg;
                 return;
