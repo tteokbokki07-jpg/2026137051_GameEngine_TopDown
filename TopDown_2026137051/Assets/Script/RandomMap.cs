@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class RandomMap : MonoBehaviour
 {
     [SerializeField] private List<GameObject> items = new List<GameObject>();
+    [SerializeField] private List<GameObject> Map = new List<GameObject>();
 
     void Start()
     {
@@ -12,6 +13,11 @@ public class RandomMap : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             items[i].SetActive(i == chosen);
+        }
+        chosen = Random.Range(0, Map.Count);
+        for (int i = 0; i < Map.Count; i++)
+        {
+            Map[i].SetActive(i == chosen);
         }
     }
 }

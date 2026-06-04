@@ -106,7 +106,7 @@ public class TestCraftSlot : MonoBehaviour
 
         RefreshUI();
     }
-    public int GetCurrentItemID()
+    public int GetCurrentItemID() //제작 시스템이 현재 재료를 읽음
     {
         if (inventory == null ||
             inventory.itemData == null ||
@@ -118,5 +118,44 @@ public class TestCraftSlot : MonoBehaviour
 
         return Mathf.FloorToInt(
             inventory.itemData[currentItemIndex].itemID);
+    }
+
+    // Craft용: 현재 슬롯의 아이템 수량을 반환합니다.
+    public int GetCurrentItemCount()
+    {
+        if (inventory == null ||
+            inventory.itemData == null ||
+            currentItemIndex < 0 ||
+            currentItemIndex >= inventory.itemData.Count)
+        {
+            return 0;
+        }
+
+        return Mathf.FloorToInt(inventory.itemData[currentItemIndex].itemCount);
+    }
+
+    // 제작용: 현재 선택된 아이템을 소모합니다. 성공하면 true 반환
+    public bool ConsumeCurrentItem(int amount)
+    {
+        if (amount <= 0) return false;
+        if (inventory == null || inventory.itemData == null) return false;
+        if (currentItemIndex < 0 || currentItemIndex >= inventory.itemData.Count) return false;
+
+        var data = inventory.itemData[currentItemIndex];
+        int id = Mathf.FloorToInt(data.itemID);
+        if (id == 0) return false; // 비어있는 슬롯
+
+        // 아이템 개수 차감
+        data.itemCount = Mathf.Max(0, data.itemCount - amount);
+
+        // 개수가 0이되면 아이템을 비웁니다 (id를 0으로)
+        if (data.itemCount <= 0)
+        {
+            data.itemCount = 0;
+        }
+
+        // UI 갱신
+        RefreshUI();
+        return true;
     }
 }

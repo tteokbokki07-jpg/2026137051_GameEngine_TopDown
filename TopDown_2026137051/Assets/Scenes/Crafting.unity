@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC7AC\uB8CC \uC774\uB984(n)"
+  m_text: "\uC7AC\uB8CC \uC774\uB984\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0abdb11ff1297474ea08192eb6b64ceb, type: 2}
   m_sharedMaterial: {fileID: -7628405497086652745, guid: 0abdb11ff1297474ea08192eb6b64ceb, type: 2}
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC7AC\uB8CC \uC774\uB984(n)"
+  m_text: "\uC7AC\uB8CC \uC774\uB984\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0abdb11ff1297474ea08192eb6b64ceb, type: 2}
   m_sharedMaterial: {fileID: -7628405497086652745, guid: 0abdb11ff1297474ea08192eb6b64ceb, type: 2}
@@ -2136,7 +2136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TestInventory
   itemData:
   - itemID: 0
-    itemCount: 0
+    itemCount: 2147484
     itemName: "\uBE48 \uC2AC\uB86F"
     itemSprite: {fileID: 0}
   - itemID: 1
@@ -5833,7 +5833,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC7AC\uB8CC \uC774\uB984(n)"
+  m_text: "\uC7AC\uB8CC \uC774\uB984\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0abdb11ff1297474ea08192eb6b64ceb, type: 2}
   m_sharedMaterial: {fileID: -7628405497086652745, guid: 0abdb11ff1297474ea08192eb6b64ceb, type: 2}
