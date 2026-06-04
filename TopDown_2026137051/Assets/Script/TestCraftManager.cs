@@ -13,6 +13,46 @@ public class CraftManager : MonoBehaviour
     public TestRecipeDataBase recipeDatabase;
 
     public TextMeshProUGUI TestResultText;
+    public TextMeshProUGUI RecipeText;
+
+    void Update() //레시피 예측 업데이트
+    {
+        if (RecipeText == null || recipeDatabase == null) return;
+
+        int[] selectedItems =
+        {
+            slot1 != null ? slot1.GetCurrentItemID() : 0,
+            slot2 != null ? slot2.GetCurrentItemID() : 0,
+            slot3 != null ? slot3.GetCurrentItemID() : 0
+        };
+
+        Array.Sort(selectedItems);
+
+        string predicted = "";
+        foreach (RecipeData recipe in recipeDatabase.recipes)
+        {
+            int[] recipeItems =
+            {
+                recipe.material1ID,
+                recipe.material2ID,
+                recipe.material3ID
+            };
+            Array.Sort(recipeItems);
+
+            bool match =
+                selectedItems[0] == recipeItems[0] &&
+                selectedItems[1] == recipeItems[1] &&
+                selectedItems[2] == recipeItems[2];
+
+            if (match)
+            {
+                predicted = recipe.recipeName;
+                break;
+            }
+        }
+
+        RecipeText.text = "이 레시피대로라면... " + predicted + "...?";
+    }
 
     public void Craft()
     {

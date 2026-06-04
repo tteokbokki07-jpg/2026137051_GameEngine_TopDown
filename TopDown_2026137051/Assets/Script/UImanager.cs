@@ -28,7 +28,7 @@ public class UImanager : MonoBehaviour
     public void GameStop()
     {
         Time.timeScale = 0;
-        SettingPanal.SetActive(false);
+        SettingPanal.SetActive(true);
         isPaused = true;
     }
     public void GamePause()
