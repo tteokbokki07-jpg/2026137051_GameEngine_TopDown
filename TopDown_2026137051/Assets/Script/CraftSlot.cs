@@ -19,6 +19,7 @@ public class CraftSlot : MonoBehaviour
 
     int currentItemID = 0;
 
+
     void Start()
     {
         RefreshUI();
