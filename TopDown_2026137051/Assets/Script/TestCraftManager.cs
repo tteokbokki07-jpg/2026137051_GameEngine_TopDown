@@ -15,7 +15,7 @@ public class CraftManager : MonoBehaviour
 
     public TextMeshProUGUI TestResultText;
     public TextMeshProUGUI RecipeText;
-
+    public InventoryUI inventoryUI;
     // 인스펙터에서 직접 할당할 인벤토리 (우선 사용)
     [Tooltip("제작 결과/재료 확인에 사용할 인벤토리. 비어있으면 slot1.inventory 사용")]
     public TestInventory inventory;
@@ -134,7 +134,7 @@ public class CraftManager : MonoBehaviour
                 Debug.Log($"결과물 개수 : {recipe.resultCount}");
 
                 inv.AddItem(recipe.resultID, recipe.resultCount);
-
+                inventoryUI.RefreshInventory();
                 Debug.Log("AddItem 호출 완료");
 
                 string successMsg =
@@ -210,9 +210,15 @@ public class CraftManager : MonoBehaviour
         var inv = inventory != null ? inventory : (slot1 != null ? slot1.inventory : null);
         if (inv == null) return;
 
-        // 각 재료별로 1개씩 소모 (같은 아이템이 여러 번 필요하면 반복적으로 소모)
+        // 각 재료별로 1개씩 소모 (itemID가 0인 경우 소모하지 않음)
         foreach (int itemID in recipeItems)
         {
+            if (itemID == 0)
+            {
+                Debug.Log($"ItemID 0은 소모하지 않음 (아이템 인덱스 무시)");
+                continue;
+            }
+
             inv.ConsumeItem(itemID, 1);
         }
     }
