@@ -630,6 +630,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &95795122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 95795124}
+  - component: {fileID: 95795123}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &95795123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95795122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013e8d1c9f9c9934a909ac2793419a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  questList:
+  - questID: 0
+    questName: "\uD018\uC2A4\uD2B8_1"
+    questDescription: "\uD14C\uC2A4\uD2B8 \uD018\uC2A4\uD2B8"
+  currentQuestIndex: 1
+--- !u!4 &95795124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95795122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 939.3809, y: 549.96857, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &124917477
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,15 +3386,15 @@ MonoBehaviour:
     itemName: "\uBE48 \uC2AC\uB86F"
     itemSprite: {fileID: 0}
   - itemID: 1
-    itemCount: 9999999
+    itemCount: 99999
     itemName: "\uC0AC\uACFC"
     itemSprite: {fileID: -2054085194094366428, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
   - itemID: 2
-    itemCount: 9999999
+    itemCount: 99999
     itemName: "\uB538\uAE30"
     itemSprite: {fileID: -7541267578785105359, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
   - itemID: 3
-    itemCount: 9999999
+    itemCount: 99999
     itemName: "\uC790\uBABD"
     itemSprite: {fileID: -4643077849930068842, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
   - itemID: 100
@@ -3513,7 +3562,7 @@ MonoBehaviour:
     material3ID: 1
     resultID: 103
     resultCount: 1
-  - recipeName: "\uB538\uAE30 \uC640\uD50C"
+  - recipeName: "\uAE30\uB85C\uD50C"
     material1ID: 2
     material2ID: 0
     material3ID: 0
@@ -3555,40 +3604,40 @@ MonoBehaviour:
     material3ID: 1
     resultID: 110
     resultCount: 1
-  - recipeName: "\uC560\uD50C\uBCA0\uB9AC \uC640\uD50C"
-    material1ID: 1
-    material2ID: 2
-    material3ID: 0
-    resultID: 111
-    resultCount: 1
   - recipeName: "\uC560\uD50C\uB85C\uC6B0 \uC640\uD50C"
     material1ID: 2
     material2ID: 1
     material3ID: 2
-    resultID: 112
+    resultID: 111
     resultCount: 1
   - recipeName: "\uC640\uD50C(That's RedRed)"
     material1ID: 1
     material2ID: 2
     material3ID: 3
-    resultID: 113
+    resultID: 112
     resultCount: 1
   - recipeName: "\uC0AC\uACFC\uBABD \uC640\uD50C"
     material1ID: 1
     material2ID: 3
     material3ID: 0
-    resultID: 114
+    resultID: 113
     resultCount: 1
   - recipeName: "\uC560\uD50C\uC790\uBABD \uC640\uD50C"
     material1ID: 1
     material2ID: 3
     material3ID: 3
-    resultID: 115
+    resultID: 114
     resultCount: 1
   - recipeName: "\uB354\uD50C\uC560\uD50C\uBABD \uC640\uD50C"
     material1ID: 1
     material2ID: 1
     material3ID: 3
+    resultID: 115
+    resultCount: 1
+  - recipeName: "\uC560\uD50C\uBCA0\uB9AC \uC640\uD50C"
+    material1ID: 1
+    material2ID: 2
+    material3ID: 0
     resultID: 116
     resultCount: 1
   - recipeName: "\uC2A4\uD2B8\uB85C\uD478\uB974\uCE20 \uC640\uD50C"
@@ -3597,7 +3646,7 @@ MonoBehaviour:
     material3ID: 0
     resultID: 117
     resultCount: 1
-  - recipeName: "\uBCA0\uB9AC\uBABD\uBCA0 \uC640\uD50C"
+  - recipeName: "\uBCA0\uB9AC\uBABD\uBCA0\uB9AC \uC640\uD50C"
     material1ID: 2
     material2ID: 2
     material3ID: 3
@@ -4604,7 +4653,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 300, y: 300}
@@ -8115,3 +8164,4 @@ SceneRoots:
   - {fileID: 743207496}
   - {fileID: 800347222}
   - {fileID: 1256082360}
+  - {fileID: 95795124}
