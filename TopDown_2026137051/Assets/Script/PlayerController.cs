@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public Sprite[] spriteLeft;
     public Sprite[] spriteRight;
     public float frameTime = 0.15f;
-    public float PickupItem = 0f;
 
     public bool canMove = true;
     private bool isRespawning = false;
@@ -21,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public bool isDash;
     public float dashSpeed = 1.75f;
     public float normalSpeed = 0.75f;
+
+    public int Fruit1 = 0;
+    public int Fruit2 = 0;
+    public int Fruit3 = 0;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -118,19 +121,40 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Finish");
             SceneManager.LoadScene("Crafting");
         }
-
-        if (collision.gameObject.CompareTag("Item"))
-        {
-            Debug.Log("item");
-            PickupItem += 1f;
-            Destroy(collision.gameObject);
-        }
-
         if (collision.gameObject.CompareTag("Respawn"))
         {
             Debug.Log("Respawn trigger entered");
             if (!isRespawning)
                 StartCoroutine(RespawnCoroutine());
+        }
+        
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_1")
+        {
+            Destroy(collision.gameObject);
+            RandomItem1();
+        }
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_2")
+        {
+            Destroy(collision.gameObject);
+            RandomItem2();
+        }
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_3")
+        {
+            Destroy(collision.gameObject);
+            RandomItem3();
+        }
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_4")
+        {
+            Destroy(collision.gameObject);
+            RandomItem4();
+        }
+        if (collision.gameObject.CompareTag("Bundle"))
+        {
+            Debug.Log("Bundle collected");
+            Fruit1 += 10;
+            Fruit2 += 10;
+            Fruit3 += 10;
+            Destroy(collision.gameObject);
         }
     }
 
@@ -177,8 +201,113 @@ public class PlayerController : MonoBehaviour
         isDash = false;
         moveSpeed = normalSpeed;
     }
-    public void GoStage()
+    public void RandomItem1()
     {
-        SceneManager.LoadScene("Play_1");
+        int choice = Random.Range(0, 2); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 2;
+                Debug.Log("RandomItem1: Fruit1");
+                break;
+            case 1:
+                Fruit2 += 2;
+                Debug.Log("RandomItem1: Fruit2");
+                break;
+            case 2:
+                Fruit3 += 2;
+                Debug.Log("RandomItem1: Fruit3");
+                break;
+        }
+    }
+    public void RandomItem2()
+    {
+        int choice = Random.Range(0, 5); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 2;
+                Debug.Log("RandomItem2: Fruit1");
+                break;
+            case 1:
+                Fruit2 += 2;
+                Debug.Log("RandomItem2: Fruit2");
+                break;
+            case 2:
+                Fruit3 += 2;
+                Debug.Log("RandomItem2: Fruit3");
+                break;
+            case 3:
+                Fruit1 += 3;
+                Fruit2 += 3;
+                Debug.Log("RandomItem2: Fruit1, 2");
+                break;
+            case 4:
+                Fruit1 += 3;
+                Fruit3 += 3;
+                Debug.Log("RandomItem2: Fruit1, 3");
+                break;
+            case 5:
+                Fruit2 += 3;
+                Fruit3 += 3;
+                Debug.Log("RandomItem2: Fruit2, 3");
+                break;
+        }
+    }
+    public void RandomItem3()
+    {
+        int choice = Random.Range(0, 3); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 3;
+                Fruit2 += 2;
+                Fruit3 += 1;
+                Debug.Log("RandomItem3: Fruit1, 23");
+                break;
+            case 1:
+                Fruit1 += 1;
+                Fruit2 += 3;
+                Fruit3 += 2;
+                Debug.Log("RandomItem3: Fruit2, 13");
+                break;
+            case 2:
+                Fruit1 += 1;
+                Fruit2 += 2;
+                Fruit3 += 3;
+                Debug.Log("RandomItem3: Fruit3, 12");
+                break;
+            case 3:
+                Fruit1 += 3;
+                Fruit2 += 3;
+                Fruit3 += 3;
+                Debug.Log("RandomItem3: Fruit2, 3");
+                break;
+        }
+    }
+    public void RandomItem4()
+    {
+        int choice = Random.Range(0, 2); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 2;
+                Fruit2 += 2;
+                Fruit3 += 2;
+                Debug.Log("RandomItem4: Fruit123 + 2");
+                break;
+            case 1:
+                Fruit1 += 4;
+                Fruit2 += 4;
+                Fruit3 += 4;
+                Debug.Log("RandomItem4: Fruit123 + 4");
+                break;
+            case 2:
+                Fruit1 += 6;
+                Fruit2 += 6;
+                Fruit3 += 6;
+                Debug.Log("RandomItem4: Fruit123 + 6");
+                break;
+        }
     }
 }
