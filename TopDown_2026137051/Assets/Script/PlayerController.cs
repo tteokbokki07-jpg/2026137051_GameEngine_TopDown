@@ -1,7 +1,9 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int Fruit1 = 0;
     public int Fruit2 = 0;
     public int Fruit3 = 0;
+    public TextMeshProUGUI FruitText;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+
         currentSprites = spriteDown;
         sr.sprite = currentSprites[0];
     }
@@ -74,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        FruitText.text = ("수집한 사과 : " + Fruit1 + "\n수집한 딸기 : " + Fruit2 + "\n수집한 자몽 : " + Fruit3);
         if (input.sqrMagnitude <= 0.01f)
         {
             frameIndex = 0;
@@ -151,9 +157,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Bundle"))
         {
             Debug.Log("Bundle collected");
-            Fruit1 += 10;
-            Fruit2 += 10;
-            Fruit3 += 10;
+            Fruit1 += 3;
+            Fruit2 += 3;
+            Fruit3 += 3;
             Destroy(collision.gameObject);
         }
     }
@@ -208,15 +214,12 @@ public class PlayerController : MonoBehaviour
         {
             case 0:
                 Fruit1 += 2;
-                Debug.Log("RandomItem1: Fruit1");
                 break;
             case 1:
                 Fruit2 += 2;
-                Debug.Log("RandomItem1: Fruit2");
                 break;
             case 2:
                 Fruit3 += 2;
-                Debug.Log("RandomItem1: Fruit3");
                 break;
         }
     }
@@ -227,30 +230,24 @@ public class PlayerController : MonoBehaviour
         {
             case 0:
                 Fruit1 += 2;
-                Debug.Log("RandomItem2: Fruit1");
                 break;
             case 1:
                 Fruit2 += 2;
-                Debug.Log("RandomItem2: Fruit2");
                 break;
             case 2:
                 Fruit3 += 2;
-                Debug.Log("RandomItem2: Fruit3");
                 break;
             case 3:
                 Fruit1 += 3;
                 Fruit2 += 3;
-                Debug.Log("RandomItem2: Fruit1, 2");
                 break;
             case 4:
                 Fruit1 += 3;
                 Fruit3 += 3;
-                Debug.Log("RandomItem2: Fruit1, 3");
                 break;
             case 5:
                 Fruit2 += 3;
                 Fruit3 += 3;
-                Debug.Log("RandomItem2: Fruit2, 3");
                 break;
         }
     }
@@ -263,25 +260,21 @@ public class PlayerController : MonoBehaviour
                 Fruit1 += 3;
                 Fruit2 += 2;
                 Fruit3 += 1;
-                Debug.Log("RandomItem3: Fruit1, 23");
                 break;
             case 1:
                 Fruit1 += 1;
                 Fruit2 += 3;
                 Fruit3 += 2;
-                Debug.Log("RandomItem3: Fruit2, 13");
                 break;
             case 2:
                 Fruit1 += 1;
                 Fruit2 += 2;
                 Fruit3 += 3;
-                Debug.Log("RandomItem3: Fruit3, 12");
                 break;
             case 3:
                 Fruit1 += 3;
                 Fruit2 += 3;
                 Fruit3 += 3;
-                Debug.Log("RandomItem3: Fruit2, 3");
                 break;
         }
     }
@@ -294,19 +287,16 @@ public class PlayerController : MonoBehaviour
                 Fruit1 += 2;
                 Fruit2 += 2;
                 Fruit3 += 2;
-                Debug.Log("RandomItem4: Fruit123 + 2");
                 break;
             case 1:
                 Fruit1 += 4;
                 Fruit2 += 4;
                 Fruit3 += 4;
-                Debug.Log("RandomItem4: Fruit123 + 4");
                 break;
             case 2:
                 Fruit1 += 6;
                 Fruit2 += 6;
                 Fruit3 += 6;
-                Debug.Log("RandomItem4: Fruit123 + 6");
                 break;
         }
     }

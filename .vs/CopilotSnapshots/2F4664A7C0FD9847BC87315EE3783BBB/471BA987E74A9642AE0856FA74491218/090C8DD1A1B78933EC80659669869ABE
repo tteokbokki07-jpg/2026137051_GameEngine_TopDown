@@ -1,0 +1,35 @@
+﻿using UnityEngine;
+
+public class PlayInventory : MonoBehaviour
+{
+    public int Fruit1 = 0;
+    public int Fruit2 = 0;
+    public int Fruit3 = 0;
+    
+    public static PlayInventory Instance; //싱글톤 설정
+
+    private void Awake()
+    {
+        // 이미 존재하는 경우 중복 제거
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        // 씬이 바뀌어도 유지
+        DontDestroyOnLoad(gameObject);
+    }
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
