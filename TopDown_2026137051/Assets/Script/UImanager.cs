@@ -1,4 +1,4 @@
-using TMPro;
+    using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,8 +6,16 @@ using UnityEngine.UI;
 public class UImanager : MonoBehaviour
 {
     public GameObject SettingPanal;
+    public GameObject InventoryPanal;
     public bool isPaused = false;
-
+    
+    public InventoryUI inventoryUI;
+    private void Awake()
+    {
+        inventoryUI = GetComponent<InventoryUI>();
+        if (inventoryUI == null)
+            inventoryUI = FindFirstObjectByType<InventoryUI>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
@@ -21,6 +29,7 @@ public class UImanager : MonoBehaviour
         {
             Time.timeScale = 1;
             SettingPanal.SetActive(false);
+            InventoryPanal.SetActive(false);
             Debug.Log("ESC_down");
             isPaused = false;
         }

@@ -22,6 +22,7 @@ public class TestCraftSlot : MonoBehaviour
 
     void Start()
     {
+        inventory = TestInventory.Instance;
         // 시작 시 slotIndex 를 현재 인덱스로 사용하되 허용 범위로 보정
         int max = GetAllowedMax();
         if (max >= 0)

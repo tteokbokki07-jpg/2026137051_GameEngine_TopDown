@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5ada5d5a5cfb64ea84fa62185c226d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestCraftSlot
-  inventory: {fileID: 743207495}
+  inventory: {fileID: 0}
   StartslotIndex: 0
   itemImage: {fileID: 1755909045}
   itemNameText: {fileID: 61519430}
@@ -3350,163 +3350,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740691630}
   m_CullTransparentMesh: 1
---- !u!1 &743207494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 743207496}
-  - component: {fileID: 743207495}
-  - component: {fileID: 743207497}
-  m_Layer: 0
-  m_Name: Inventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &743207495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743207494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ad81829c075ae44b6fa0f5e18c7591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestInventory
-  itemData:
-  - itemID: 0
-    itemCount: 9999999
-    itemName: "\uBE48 \uC2AC\uB86F"
-    itemSprite: {fileID: 0}
-  - itemID: 1
-    itemCount: 99999
-    itemName: "\uC0AC\uACFC"
-    itemSprite: {fileID: -2054085194094366428, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 2
-    itemCount: 99999
-    itemName: "\uB538\uAE30"
-    itemSprite: {fileID: -7541267578785105359, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 3
-    itemCount: 99999
-    itemName: "\uC790\uBABD"
-    itemSprite: {fileID: -4643077849930068842, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 100
-    itemCount: 0
-    itemName: "\uD074\uB798\uC2DD \uC640\uD50C"
-    itemSprite: {fileID: 8840035606078676826, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 101
-    itemCount: 0
-    itemName: "\uC560\uD50C\uC640\uD50C"
-    itemSprite: {fileID: -5656568530861391921, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 102
-    itemCount: 0
-    itemName: "\uC560\uD50C\uD32C\uD50C"
-    itemSprite: {fileID: 7832003532929858877, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 103
-    itemCount: 0
-    itemName: "\uC2ED\uC774 \uC640\uD50C"
-    itemSprite: {fileID: 2826616529266284738, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 104
-    itemCount: 0
-    itemName: "\uAE30\uB85C\uD50C"
-    itemSprite: {fileID: -2583351100429680085, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 105
-    itemCount: 0
-    itemName: "\uC790\uB9E4\uC640\uD50C"
-    itemSprite: {fileID: 848684141871182103, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 106
-    itemCount: 0
-    itemName: "\uBCA0\uB9AC\uBCA0\uB9AC\uD50C"
-    itemSprite: {fileID: -5014197571899485950, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 107
-    itemCount: 0
-    itemName: "\uC790\uD50C"
-    itemSprite: {fileID: 5955845004299855301, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 108
-    itemCount: 0
-    itemName: "\uBABD\uBABD\uC790\uD50C"
-    itemSprite: {fileID: 7891730029618847848, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 109
-    itemCount: 0
-    itemName: "\uBABD\uC6C0\uBABD\uC6C0 \uC640\uD50C"
-    itemSprite: {fileID: 4428833864384188484, guid: 3e8308fa48d92b247ac7088d1d58e784, type: 3}
-  - itemID: 110
-    itemCount: 0
-    itemName: "\uACFC\uC999\uD321\uD321 \uC560\uD50C\uBCA0\uB9AC \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 111
-    itemCount: 0
-    itemName: "\uC560\uD50C\uB85C\uC6B0 \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 112
-    itemCount: 0
-    itemName: "\uC640\uD50C(That's RedRed)"
-    itemSprite: {fileID: 0}
-  - itemID: 113
-    itemCount: 0
-    itemName: "\uC0AC\uACFC\uBABD \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 114
-    itemCount: 0
-    itemName: "\uC560\uD50C\uC790\uBABD \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 115
-    itemCount: 0
-    itemName: "\uB354\uD50C\uC560\uD50C\uBABD \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 116
-    itemCount: 0
-    itemName: "\uC560\uD50C\uBCA0\uB9AC \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 117
-    itemCount: 0
-    itemName: "\uC2A4\uD2B8\uB85C\uD478\uB974\uCE20 \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 118
-    itemCount: 0
-    itemName: "\uBCA0\uB9AC\uBABD\uBCA0\uB9AC \uC640\uD50C"
-    itemSprite: {fileID: 0}
-  - itemID: 119
-    itemCount: 0
-    itemName: "\uC790\uBABD\uB538\uBABD \uC640\uD50C"
-    itemSprite: {fileID: 0}
---- !u!4 &743207496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743207494}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 848.366, y: 519.45935, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &743207497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743207494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1b9b91720fc7f4a83b97530b848f4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
-  inventory: {fileID: 743207495}
-  content: {fileID: 1174660786}
-  slotPrefab: {fileID: 2823218948128288022, guid: db18d6515e1810b4d954ac12c9d3fb87, type: 3}
 --- !u!1 &800347219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3676,8 +3519,8 @@ MonoBehaviour:
   recipeDatabase: {fileID: 800347220}
   TestResultText: {fileID: 1051740100}
   RecipeText: {fileID: 414194038}
-  inventoryUI: {fileID: 743207497}
-  inventory: {fileID: 743207495}
+  inventory: {fileID: 0}
+  inventoryUI: {fileID: 1256082361}
   resultMappings:
   - resultID: 100
     itemID: 100
@@ -4887,6 +4730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1256082360}
   - component: {fileID: 1256082359}
+  - component: {fileID: 1256082361}
   m_Layer: 0
   m_Name: UImanager
   m_TagString: Untagged
@@ -4907,7 +4751,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UImanager
   SettingPanal: {fileID: 1788243637}
+  InventoryPanal: {fileID: 1738530792}
   isPaused: 0
+  inventoryUI: {fileID: 0}
 --- !u!4 &1256082360
 Transform:
   m_ObjectHideFlags: 0
@@ -4923,6 +4769,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256082361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256082358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1b9b91720fc7f4a83b97530b848f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  inventory: {fileID: 0}
+  content: {fileID: 1174660786}
+  slotPrefab: {fileID: 2823218948128288022, guid: db18d6515e1810b4d954ac12c9d3fb87, type: 3}
 --- !u!1 &1266285880
 GameObject:
   m_ObjectHideFlags: 0
@@ -6223,7 +6084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5ada5d5a5cfb64ea84fa62185c226d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestCraftSlot
-  inventory: {fileID: 743207495}
+  inventory: {fileID: 0}
   StartslotIndex: 0
   itemImage: {fileID: 1266285882}
   itemNameText: {fileID: 1613073955}
@@ -6747,7 +6608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5ada5d5a5cfb64ea84fa62185c226d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestCraftSlot
-  inventory: {fileID: 743207495}
+  inventory: {fileID: 0}
   StartslotIndex: 0
   itemImage: {fileID: 1419287359}
   itemNameText: {fileID: 673941601}
@@ -8161,7 +8022,6 @@ SceneRoots:
   - {fileID: 1300448153}
   - {fileID: 94695885}
   - {fileID: 1580799294}
-  - {fileID: 743207496}
   - {fileID: 800347222}
   - {fileID: 95795124}
   - {fileID: 1256082360}

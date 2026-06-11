@@ -5,9 +5,9 @@ public class InventoryUI : MonoBehaviour
     public TestInventory inventory;
     public Transform content;
     public GameObject slotPrefab;
-
     void Start()
     {
+        inventory = TestInventory.Instance;
         RefreshInventory();
     }
     public void RefreshInventory()

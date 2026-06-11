@@ -35,16 +35,16 @@ public class PlayerController : MonoBehaviour
     private Sprite[] currentSprites;
     private int frameIndex = 0;
     private float timer = 0f;
+    InventoryUI ui = FindFirstObjectByType<InventoryUI>();
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
-
         currentSprites = spriteDown;
         sr.sprite = currentSprites[0];
     }
+
 
     public void OnMove(InputValue value)
     {
@@ -157,9 +157,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Bundle"))
         {
             Debug.Log("Bundle collected");
-            Fruit1 += 3;
-            Fruit2 += 3;
-            Fruit3 += 3;
+            Fruit1 += 3; Fruit2 += 3; Fruit3 += 3;
+            AddItem1(3); AddItem2(3); AddItem3(3);
+            if (ui != null)
+            {
+                ui.RefreshInventory();
+            }
             Destroy(collision.gameObject);
         }
     }
@@ -213,13 +216,13 @@ public class PlayerController : MonoBehaviour
         switch (choice)
         {
             case 0:
-                Fruit1 += 2;
+                Fruit1 += 2; AddItem1(2);
                 break;
             case 1:
-                Fruit2 += 2;
+                Fruit2 += 2; AddItem2(2);
                 break;
             case 2:
-                Fruit3 += 2;
+                Fruit3 += 2; AddItem3(2);
                 break;
         }
     }
@@ -229,25 +232,25 @@ public class PlayerController : MonoBehaviour
         switch (choice)
         {
             case 0:
-                Fruit1 += 2;
+                Fruit1 += 2; AddItem1(2);
                 break;
             case 1:
-                Fruit2 += 2;
+                Fruit2 += 2; AddItem2(2);
                 break;
             case 2:
-                Fruit3 += 2;
+                Fruit3 += 2; AddItem3(2);
                 break;
             case 3:
-                Fruit1 += 3;
-                Fruit2 += 3;
+                Fruit1 += 3; AddItem1(3);
+                Fruit2 += 3; AddItem2(3);
                 break;
             case 4:
-                Fruit1 += 3;
-                Fruit3 += 3;
+                Fruit1 += 3; AddItem1(3);
+                Fruit3 += 3; AddItem3(3);
                 break;
             case 5:
-                Fruit2 += 3;
-                Fruit3 += 3;
+                Fruit2 += 3; AddItem2(3);
+                Fruit3 += 3; AddItem3(3);
                 break;
         }
     }
@@ -257,24 +260,24 @@ public class PlayerController : MonoBehaviour
         switch (choice)
         {
             case 0:
-                Fruit1 += 3;
-                Fruit2 += 2;
-                Fruit3 += 1;
+                Fruit1 += 3; AddItem1(3);
+                Fruit2 += 2; AddItem2(2);
+                Fruit3 += 1; AddItem3(1);
                 break;
             case 1:
-                Fruit1 += 1;
-                Fruit2 += 3;
-                Fruit3 += 2;
+                Fruit1 += 1; AddItem1(1);
+                Fruit2 += 3; AddItem2(3);
+                Fruit3 += 2; AddItem3(2);
                 break;
             case 2:
-                Fruit1 += 1;
-                Fruit2 += 2;
-                Fruit3 += 3;
+                Fruit1 += 1; AddItem1(1);
+                Fruit2 += 2; AddItem2(2);
+                Fruit3 += 3; AddItem3(3);
                 break;
             case 3:
-                Fruit1 += 3;
-                Fruit2 += 3;
-                Fruit3 += 3;
+                Fruit1 += 3; AddItem1(3);
+                Fruit2 += 3; AddItem2(3);
+                Fruit3 += 3; AddItem3(3);
                 break;
         }
     }
@@ -284,20 +287,95 @@ public class PlayerController : MonoBehaviour
         switch (choice)
         {
             case 0:
-                Fruit1 += 2;
-                Fruit2 += 2;
-                Fruit3 += 2;
+                Fruit1 += 2; AddItem1(2);
+                Fruit2 += 2; AddItem2(2);
+                Fruit3 += 2; AddItem3(2);
                 break;
             case 1:
-                Fruit1 += 4;
-                Fruit2 += 4;
-                Fruit3 += 4;
+                Fruit1 += 4; AddItem1(4);
+                Fruit2 += 4; AddItem2(4);
+                Fruit3 += 4; AddItem3(4);
                 break;
             case 2:
-                Fruit1 += 6;
-                Fruit2 += 6;
-                Fruit3 += 6;
+                Fruit1 += 6; AddItem1(6);
+                Fruit2 += 6; AddItem2(6);
+                Fruit3 += 6; AddItem3(6);
                 break;
         }
+    }
+    public void AddItem1(int increase) // 아이템 ID 1의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem1: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem1: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 1)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 1 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem1: ItemID 1인 아이템을 찾지 못했습니다.");
+    }
+    public void AddItem2(int increase) // 아이템 ID 2의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem2: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem2: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 2)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 2 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem2: ItemID 2인 아이템을 찾지 못했습니다.");
+    }
+    public void AddItem3(int increase) // 아이템 ID 3의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem3: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem3: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 3)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 3 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem3: ItemID 3인 아이템을 찾지 못했습니다.");
     }
 }

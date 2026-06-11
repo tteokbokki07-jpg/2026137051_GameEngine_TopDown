@@ -15,11 +15,14 @@ public class CraftManager : MonoBehaviour
 
     public TextMeshProUGUI TestResultText;
     public TextMeshProUGUI RecipeText;
-    public InventoryUI inventoryUI;
-    // 인스펙터에서 직접 할당할 인벤토리 (우선 사용)
-    [Tooltip("제작 결과/재료 확인에 사용할 인벤토리. 비어있으면 slot1.inventory 사용")]
     public TestInventory inventory;
+    public InventoryUI inventoryUI;
 
+    private void Awake()
+    {
+        inventory = TestInventory.Instance;
+        inventoryUI = FindFirstObjectByType<InventoryUI>();
+    }
     [Serializable]
     public class ResultToItemMapping
     {

@@ -1,8 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TestInventory : MonoBehaviour
 {
+    public static TestInventory Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [System.Serializable]
     public class ItemData
     {
@@ -13,6 +29,7 @@ public class TestInventory : MonoBehaviour
     }
 
     public List<ItemData> itemData;
+
 
     public int GetItemCount(int itemID)
     {
