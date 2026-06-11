@@ -60,7 +60,7 @@ public class TestCraftSlot : MonoBehaviour
         }
     }
 
-    void RefreshUI()
+    public void RefreshUI()
     {
         if (inventory == null || inventory.itemData == null)
         {
