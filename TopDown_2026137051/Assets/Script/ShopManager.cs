@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class ShopManager : MonoBehaviour
     private int currentSelectedID = -1;
     private TestInventory.ItemData currentSelectedItem = null;
 
+    public int EndingCost = 3200;
+    public TMP_Text EndingValueText;
+
     public void Start()
     {
         TodayRandomWapple();
+        EndingValueText.text = "구매가 : " + EndingCost;
     }
     public void Update()
     {
@@ -141,5 +146,15 @@ public class ShopManager : MonoBehaviour
             TodayHaveText.text = "(보유량 : " + newHave + ")";
 
         Debug.Log($"TodayWappleSell: ItemID {currentSelectedID} 1개 차감, 금액 {TodaySellValue} 차감. 남은 보유: {newHave}, 남은 돈: {inventory.Money}");
+    }
+
+    public void BuyEnding()
+    {
+        TestInventory inventory = TestInventory.Instance;
+        if (inventory.Money >= EndingCost)
+        {
+            inventory.Money -= EndingCost;
+            SceneManager.LoadScene("End");
+        }
     }
 }
