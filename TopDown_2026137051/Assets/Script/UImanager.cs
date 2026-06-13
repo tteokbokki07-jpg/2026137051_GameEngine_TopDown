@@ -64,4 +64,8 @@ public class UImanager : MonoBehaviour
     {
         SceneManager.LoadScene("Crafting");
     }
+    public void GoShop()
+    {
+        SceneManager.LoadScene("Shop");
+    }
 }

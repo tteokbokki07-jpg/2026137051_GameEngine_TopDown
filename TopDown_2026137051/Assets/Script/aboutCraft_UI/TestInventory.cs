@@ -27,7 +27,7 @@ public class TestInventory : MonoBehaviour
         public string itemName;
         public Sprite itemSprite;
     }
-
+    public int Money = 0;
     public List<ItemData> itemData;
 
 

@@ -1,0 +1,53 @@
+﻿using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ShopManager : MonoBehaviour
+{
+    public Image TodayImage;
+    public TMP_Text TodayText;
+
+    public void Start()
+    {
+        TodayRandomWapple();
+    }
+
+    // 인벤토리에서 itemID가 100~119인 항목들을 랜덤으로 하나 골라
+    // 해당 itemCount를 디버그로 출력합니다.
+    public void TodayRandomWapple()
+    {
+        TestInventory inventory = TestInventory.Instance;
+
+        if (inventory == null)
+            Debug.LogWarning("LogRandomItemCountInRange: TestInventory 인스턴스가 없습니다.");
+
+        if (inventory.itemData == null || inventory.itemData.Count == 0)
+            Debug.LogWarning("LogRandomItemCountInRange: 인벤토리에 아이템 데이터가 없습니다.");
+
+        List<int> candidates = new List<int>();
+
+        foreach (var item in inventory.itemData)
+        {
+            int id = (int)item.itemID;
+            if (id >= 100 && id <= 119)
+            {
+                candidates.Add(id);
+            }
+        }
+
+        if (candidates.Count == 0)
+        {
+            Debug.LogWarning("LogRandomItemCountInRange: 범위(100~119)에 해당하는 아이템이 없습니다.");
+            return;
+        }
+
+        int randIndex = Random.Range(0, candidates.Count);
+        int selectedID = candidates[randIndex];
+
+        int count = inventory.GetItemCount(selectedID);
+
+        Debug.Log($"선택된 ItemID: {selectedID}, itemCount: {count}");
+    }
+
+}
