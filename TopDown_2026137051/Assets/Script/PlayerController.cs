@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
             if (!isRespawning)
             {
                 StartCoroutine(RespawnCoroutine());
+                Fruit1 -= 1; Fruit2 -= 1; Fruit3 -= 1; Wapple -= 1;
                 RemoveItem1(1); RemoveItem2(1); RemoveItem3(1); RemoveItem4(1);
             }
         }
