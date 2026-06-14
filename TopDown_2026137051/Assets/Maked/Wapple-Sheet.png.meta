@@ -47,6 +47,36 @@ TextureImporter:
   - first:
       213: 4428833864384188484
     second: Wapple-Sheet_14
+  - first:
+      213: 6342091194184729992
+    second: Wapple-Sheet_15
+  - first:
+      213: 7473494176519995059
+    second: Wapple-Sheet_16
+  - first:
+      213: -7994375984846350978
+    second: Wapple-Sheet_17
+  - first:
+      213: -937419826519741352
+    second: Wapple-Sheet_18
+  - first:
+      213: -7994449482784136483
+    second: Wapple-Sheet_19
+  - first:
+      213: 342594728883207594
+    second: Wapple-Sheet_20
+  - first:
+      213: 8068561044918508804
+    second: Wapple-Sheet_21
+  - first:
+      213: 1791450480808804354
+    second: Wapple-Sheet_22
+  - first:
+      213: -7598088918096011321
+    second: Wapple-Sheet_23
+  - first:
+      213: 1841169048874004625
+    second: Wapple-Sheet_24
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -471,11 +501,231 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 885838ad652a30850800000000000000
+      internalID: 6342091194184729992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bebc667b5f27b760800000000000000
+      internalID: 7473494176519995059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 5440
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e75d156d5654e0190800000000000000
+      internalID: -7994375984846350978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85ce1ea62ad9df2f0800000000000000
+      internalID: -937419826519741352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 6080
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd2a8d34d820e0190800000000000000
+      internalID: -7994449482784136483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 6400
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aad310d371421c400800000000000000
+      internalID: 342594728883207594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40d1ce2758949ff60800000000000000
+      internalID: 8068561044918508804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 200cf4588b28cd810800000000000000
+      internalID: 1791450480808804354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 7360
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf1e09a26a2e8690800000000000000
+      internalID: -7598088918096011321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wapple-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 7680
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1903499be752d8910800000000000000
+      internalID: 1841169048874004625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8690aa1e556fe3347b907b778ce3cee4
+    spriteID: 26f5f8463958ae947bfc201860fabd47
     internalID: 0
     vertices: []
     indices: 
@@ -485,7 +735,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":15.0,"y":1.0},"gridSpriteSize":{"x":320.0,"y":320.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":25.0,"y":1.0},"gridSpriteSize":{"x":320.0,"y":320.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Wapple-Sheet_0: 8189470360381586902
       Wapple-Sheet_1: -2739118323994920990
@@ -494,7 +744,17 @@ TextureImporter:
       Wapple-Sheet_12: 5955845004299855301
       Wapple-Sheet_13: 7891730029618847848
       Wapple-Sheet_14: 4428833864384188484
+      Wapple-Sheet_15: 6342091194184729992
+      Wapple-Sheet_16: 7473494176519995059
+      Wapple-Sheet_17: -7994375984846350978
+      Wapple-Sheet_18: -937419826519741352
+      Wapple-Sheet_19: -7994449482784136483
       Wapple-Sheet_2: -2054085194094366428
+      Wapple-Sheet_20: 342594728883207594
+      Wapple-Sheet_21: 8068561044918508804
+      Wapple-Sheet_22: 1791450480808804354
+      Wapple-Sheet_23: -7598088918096011321
+      Wapple-Sheet_24: 1841169048874004625
       Wapple-Sheet_3: -7541267578785105359
       Wapple-Sheet_4: -4643077849930068842
       Wapple-Sheet_5: 8840035606078676826

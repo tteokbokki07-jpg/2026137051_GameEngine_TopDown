@@ -10,6 +10,7 @@ public class CraftManager : MonoBehaviour
     public TestCraftSlot slot1;
     public TestCraftSlot slot2;
     public TestCraftSlot slot3;
+    public TMP_Text Wapple;
 
     public TestRecipeDataBase recipeDatabase;
 
@@ -70,6 +71,11 @@ public class CraftManager : MonoBehaviour
         }
 
         RecipeText.text = "이 레시피대로라면... " + predicted + "...?";
+        // itemID 4 (와플) 보유 수량을 Wapple 텍스트에 표시
+        if (Wapple != null && inventory != null)
+        {
+            Wapple.text = "제작 가능 횟수 : " + inventory.GetItemCount(4).ToString();
+        }
     }
 
     public void Craft()
@@ -198,6 +204,12 @@ public class CraftManager : MonoBehaviour
             if (haveCount < requiredCount)
                 return false;
         }
+        // 추가 검사: itemID 4가 레시피에 포함되어 있지 않더라도, 인벤토리에 1개 이상 있어야 함
+        if (!required.ContainsKey(4))
+        {
+            if (inv.GetItemCount(4) < 1)
+                return false;
+        }
         return true;
     }
 
@@ -223,6 +235,13 @@ public class CraftManager : MonoBehaviour
             }
 
             inv.ConsumeItem(itemID, 1);
+        }
+
+        // 제작 성공시 추가로 itemID 4를 1개 소모한다 (레시피에 이미 4가 포함되어 있다면 중복 소모를 피함)
+        bool recipeContains4 = Array.Exists(recipeItems, id => id == 4);
+        if (!recipeContains4)
+        {
+            inv.ConsumeItem(4, 1);
         }
     }
 }

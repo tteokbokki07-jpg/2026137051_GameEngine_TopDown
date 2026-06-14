@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int Fruit1 = 0;
     public int Fruit2 = 0;
     public int Fruit3 = 0;
+    public int Wapple = 0;
     public TextMeshProUGUI FruitText;
 
     private Rigidbody2D rb;
@@ -79,7 +80,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        FruitText.text = ("수집한 사과 : " + Fruit1 + "\n수집한 딸기 : " + Fruit2 + "\n수집한 자몽 : " + Fruit3);
+        FruitText.text = ("수집한 사과 : " + Fruit1 + "\n수집한 딸기 : " + Fruit2 +
+            "\n수집한 자몽 : " + Fruit3 + "\n수집한 와플 : " + Wapple);
         if (input.sqrMagnitude <= 0.01f)
         {
             frameIndex = 0;
@@ -131,39 +133,43 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Respawn trigger entered");
             if (!isRespawning)
+            {
                 StartCoroutine(RespawnCoroutine());
+                RemoveItem1(1); RemoveItem2(1); RemoveItem3(1); RemoveItem4(1);
+            }
         }
         
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_1")
         {
             Destroy(collision.gameObject);
             RandomItem1();
+            ui.RefreshInventory();
         }
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_2")
         {
             Destroy(collision.gameObject);
             RandomItem2();
+            ui.RefreshInventory();
         }
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_3")
         {
             Destroy(collision.gameObject);
             RandomItem3();
+            ui.RefreshInventory();
         }
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_4")
         {
             Destroy(collision.gameObject);
             RandomItem4();
+            ui.RefreshInventory();
         }
         if (collision.gameObject.CompareTag("Bundle"))
         {
             Debug.Log("Bundle collected");
-            Fruit1 += 3; Fruit2 += 3; Fruit3 += 3;
-            AddItem1(3); AddItem2(3); AddItem3(3);
-            if (ui != null)
-            {
-                ui.RefreshInventory();
-            }
+            Fruit1 += 3; Fruit2 += 3; Fruit3 += 3; Wapple += 2;
+            AddItem1(3); AddItem2(3); AddItem3(3); AddItem4(2);
             Destroy(collision.gameObject);
+            ui.RefreshInventory();
         }
     }
 
@@ -225,6 +231,7 @@ public class PlayerController : MonoBehaviour
                 Fruit3 += 2; AddItem3(2);
                 break;
         }
+        Wapple += 1; AddItem4(1);
     }
     public void RandomItem2()
     {
@@ -253,6 +260,7 @@ public class PlayerController : MonoBehaviour
                 Fruit3 += 3; AddItem3(3);
                 break;
         }
+        Wapple += 1; AddItem4(1);
     }
     public void RandomItem3()
     {
@@ -280,6 +288,7 @@ public class PlayerController : MonoBehaviour
                 Fruit3 += 3; AddItem3(3);
                 break;
         }
+        Wapple += 1; AddItem4(1);
     }
     public void RandomItem4()
     {
@@ -302,6 +311,7 @@ public class PlayerController : MonoBehaviour
                 Fruit3 += 6; AddItem3(6);
                 break;
         }
+        Wapple += 2; AddItem4(2);
     }
     public void AddItem1(int increase) // 아이템 ID 1의 개수를 증가시키는 함수
     {
@@ -319,14 +329,14 @@ public class PlayerController : MonoBehaviour
             if ((int)item.itemID == 1)
             {
                 item.itemCount += increase;
-                Debug.Log($"ItemID 1 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                Debug.Log($"ItemID 1 ({item.itemName})의 itemCount를 {increase}만큼 증가. (총: {item.itemCount})");
                 found = true;
                 break;
             }
         }
 
         if (!found)
-            Debug.LogWarning("AddItem1: ItemID 1인 아이템을 찾지 못했습니다.");
+            Debug.LogWarning("AddItem1: ItemID 1을 인벤토리에서 찾을 수 없습니다.");
     }
     public void AddItem2(int increase) // 아이템 ID 2의 개수를 증가시키는 함수
     {
@@ -344,14 +354,14 @@ public class PlayerController : MonoBehaviour
             if ((int)item.itemID == 2)
             {
                 item.itemCount += increase;
-                Debug.Log($"ItemID 2 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                Debug.Log($"ItemID 2 ({item.itemName})의 itemCount를 {increase}만큼 증가. (총: {item.itemCount})");
                 found = true;
                 break;
             }
         }
 
         if (!found)
-            Debug.LogWarning("AddItem2: ItemID 2인 아이템을 찾지 못했습니다.");
+            Debug.LogWarning("AddItem2: ItemID 2을 인벤토리에서 찾을 수 없습니다.");
     }
     public void AddItem3(int increase) // 아이템 ID 3의 개수를 증가시키는 함수
     {
@@ -369,13 +379,180 @@ public class PlayerController : MonoBehaviour
             if ((int)item.itemID == 3)
             {
                 item.itemCount += increase;
-                Debug.Log($"ItemID 3 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                Debug.Log($"ItemID 3 ({item.itemName})의 itemCount를 {increase}만큼 증가. (총: {item.itemCount})");
                 found = true;
                 break;
             }
         }
 
         if (!found)
-            Debug.LogWarning("AddItem3: ItemID 3인 아이템을 찾지 못했습니다.");
+            Debug.LogWarning("AddItem3: ItemID 3을 인벤토리에서 찾을 수 없습니다.");
+    }
+    public void AddItem4(int increase) // 아이템 ID 4의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem4: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem4: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 4)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 4 ({item.itemName})의 itemCount를 {increase}만큼 증가. (총: {item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem4: ItemID 4을 인벤토리에서 찾을 수 없습니다.");
+    }
+
+    // RemoveItem 함수들: 인벤토리에서 해당 아이템을 안전하게 감소시킵니다.
+    public void RemoveItem1(int decrease)
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+        {
+            Debug.LogWarning("RemoveItem1: Inventory 오브젝트를 찾을 수 없습니다.");
+            return;
+        }
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+        {
+            Debug.LogWarning("RemoveItem1: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+            return;
+        }
+
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 1)
+            {
+                if (item.itemCount <= 0)
+                {
+                    Debug.LogWarning($"RemoveItem1: ItemID 1 ({item.itemName})의 보유량이 없습니다.");
+                    return;
+                }
+
+                item.itemCount -= decrease;
+                if (item.itemCount < 0) item.itemCount = 0;
+                Debug.Log($"RemoveItem1: ItemID 1 ({item.itemName})의 itemCount를 {decrease}만큼 감소. (총: {item.itemCount})");
+                return;
+            }
+        }
+
+        Debug.LogWarning("RemoveItem1: ItemID 1을 인벤토리에서 찾을 수 없습니다.");
+    }
+    public void RemoveItem2(int decrease)
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+        {
+            Debug.LogWarning("RemoveItem2: Inventory 오브젝트를 찾을 수 없습니다.");
+            return;
+        }
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+        {
+            Debug.LogWarning("RemoveItem2: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+            return;
+        }
+
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 2)
+            {
+                if (item.itemCount <= 0)
+                {
+                    Debug.LogWarning($"RemoveItem2: ItemID 2 ({item.itemName})의 보유량이 없습니다.");
+                    return;
+                }
+
+                item.itemCount -= decrease;
+                if (item.itemCount < 0) item.itemCount = 0;
+                Debug.Log($"RemoveItem2: ItemID 2 ({item.itemName})의 itemCount를 {decrease}만큼 감소. (총: {item.itemCount})");
+                return;
+            }
+        }
+
+        Debug.LogWarning("RemoveItem2: ItemID 2을 인벤토리에서 찾을 수 없습니다.");
+    }
+    public void RemoveItem3(int decrease)
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+        {
+            Debug.LogWarning("RemoveItem3: Inventory 오브젝트를 찾을 수 없습니다.");
+            return;
+        }
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+        {
+            Debug.LogWarning("RemoveItem3: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+            return;
+        }
+
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 3)
+            {
+                if (item.itemCount <= 0)
+                {
+                    Debug.LogWarning($"RemoveItem3: ItemID 3 ({item.itemName})의 보유량이 없습니다.");
+                    return;
+                }
+
+                item.itemCount -= decrease;
+                if (item.itemCount < 0) item.itemCount = 0;
+                Debug.Log($"RemoveItem3: ItemID 3 ({item.itemName})의 itemCount를 {decrease}만큼 감소. (총: {item.itemCount})");
+                return;
+            }
+        }
+
+        Debug.LogWarning("RemoveItem3: ItemID 3을 인벤토리에서 찾을 수 없습니다.");
+    }
+    public void RemoveItem4(int decrease)
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+        {
+            Debug.LogWarning("RemoveItem4: Inventory 오브젝트를 찾을 수 없습니다.");
+            return;
+        }
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+        {
+            Debug.LogWarning("RemoveItem4: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+            return;
+        }
+
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 4)
+            {
+                if (item.itemCount <= 0)
+                {
+                    Debug.LogWarning($"RemoveItem4: ItemID 4 ({item.itemName})의 보유량이 없습니다.");
+                    return;
+                }
+
+                item.itemCount -= decrease;
+                if (item.itemCount < 0) item.itemCount = 0;
+                Debug.Log($"RemoveItem4: ItemID 4 ({item.itemName})의 itemCount를 {decrease}만큼 감소. (총: {item.itemCount})");
+                return;
+            }
+        }
+
+        Debug.LogWarning("RemoveItem4: ItemID 4을 인벤토리에서 찾을 수 없습니다.");
     }
 }

@@ -95,4 +95,21 @@ public class TestInventory : MonoBehaviour
         Debug.LogError($"ConsumeItem 실패 : ItemID {itemID}");
         return false;
     }
+
+    // 모든 아이템의 개수를 0으로 초기화합니다.
+    public void ClearItem()
+    {
+        if (itemData == null)
+        {
+            Debug.LogWarning("ClearItem: itemData가 null입니다.");
+            return;
+        }
+
+        foreach (var item in itemData)
+        {
+            item.itemCount = 0;
+        }
+
+        Debug.Log("ClearItem: 모든 아이템 수량을 0으로 초기화했습니다.");
+    }
 }

@@ -68,4 +68,9 @@ public class UImanager : MonoBehaviour
     {
         SceneManager.LoadScene("Shop");
     }
+    public void InventoryClear()
+    {
+        TestInventory inventory = TestInventory.Instance;
+        inventory.ClearItem();
+    }
 }

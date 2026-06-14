@@ -1,0 +1,413 @@
+﻿using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+public class PlayerController : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    public Sprite[] spriteUp;
+    public Sprite[] spriteDown;
+    public Sprite[] spriteLeft;
+    public Sprite[] spriteRight;
+    public float frameTime = 0.15f;
+
+    public bool canMove = true;
+    private bool isRespawning = false;
+    public Transform Respawnpoint;
+
+    public float respawnRotationSpeed = 360f; // Respawn 중 Z축 회전 속도(도/초)
+
+    public bool isDash;
+    public float dashSpeed = 1.75f;
+    public float normalSpeed = 0.75f;
+
+    public int Fruit1 = 0;
+    public int Fruit2 = 0;
+    public int Fruit3 = 0;
+    public int Wapple = 0;
+    public TextMeshProUGUI FruitText;
+
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
+    private Vector2 input;
+    private Vector2 velocity;
+    private Sprite[] currentSprites;
+    private int frameIndex = 0;
+    private float timer = 0f;
+    InventoryUI ui = FindFirstObjectByType<InventoryUI>();
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        currentSprites = spriteDown;
+        sr.sprite = currentSprites[0];
+    }
+
+
+    public void OnMove(InputValue value)
+    {
+        // canMove가 true일 때만 입력을 처리하고, 아닐 경우 입력/속도를 0으로 유지
+        if (!canMove)
+        {
+            input = Vector2.zero;
+            velocity = Vector2.zero;
+            return;
+        }
+
+        input = value.Get<Vector2>();
+        velocity = input.normalized * moveSpeed;
+        if (input.sqrMagnitude > 0.01f)
+        {
+            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+            {
+                if (input.x > 0)
+                    ChangeSprites(spriteRight);
+                else
+                    ChangeSprites(spriteLeft);
+            }
+            else
+            {
+                if (input.y > 0)
+                    ChangeSprites(spriteUp);
+                else
+                    ChangeSprites(spriteDown);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        FruitText.text = ("수집한 사과 : " + Fruit1 + "\n수집한 딸기 : " + Fruit2 +
+            "\n수집한 자몽 : " + Fruit3 + "\n수집한 와플 : " + Wapple);
+        if (input.sqrMagnitude <= 0.01f)
+        {
+            frameIndex = 0;
+            sr.sprite = currentSprites[frameIndex];
+            return;
+        }
+        timer += Time.deltaTime;
+        if (timer >= frameTime)
+        {
+            timer = 0f;
+            frameIndex++;
+            if (frameIndex >= currentSprites.Length)
+                frameIndex = 0;
+            sr.sprite = currentSprites[frameIndex];
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isDash = true;
+            moveSpeed = dashSpeed;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isDash = false;
+            moveSpeed = normalSpeed;
+        }
+    }
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+    }
+    private void ChangeSprites(Sprite[] newSprites)
+    {
+        if (currentSprites == newSprites)
+            return;
+        currentSprites = newSprites;
+        frameIndex = 0;
+        timer = 0f;
+        sr.sprite = currentSprites[frameIndex];
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("Finish");
+            SceneManager.LoadScene("Crafting");
+        }
+        if (collision.gameObject.CompareTag("Respawn"))
+        {
+            Debug.Log("Respawn trigger entered");
+            if (!isRespawning)
+                StartCoroutine(RespawnCoroutine());
+        }
+        
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_1")
+        {
+            Destroy(collision.gameObject);
+            RandomItem1();
+            ui.RefreshInventory();
+        }
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_2")
+        {
+            Destroy(collision.gameObject);
+            RandomItem2();
+            ui.RefreshInventory();
+        }
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_3")
+        {
+            Destroy(collision.gameObject);
+            RandomItem3();
+            ui.RefreshInventory();
+        }
+        if (collision.gameObject.CompareTag("Item") && collision.gameObject.name == "Material_4")
+        {
+            Destroy(collision.gameObject);
+            RandomItem4();
+            ui.RefreshInventory();
+        }
+        if (collision.gameObject.CompareTag("Bundle"))
+        {
+            Debug.Log("Bundle collected");
+            Fruit1 += 3; Fruit2 += 3; Fruit3 += 3; Wapple += 2;
+            AddItem1(3); AddItem2(3); AddItem3(3); AddItem4(2);
+            Destroy(collision.gameObject);
+            ui.RefreshInventory();
+        }
+    }
+
+    private System.Collections.IEnumerator RespawnCoroutine()
+    {
+        if (Respawnpoint == null)
+        {
+            Debug.LogWarning("Respawnpoint이 할당되지 않았습니다.");
+            yield break;
+        }
+
+        isRespawning = true;
+        canMove = false;
+
+        // 현재 회전을 저장(나중에 복원)
+        Quaternion originalRotation = transform.rotation;
+
+        // 0.5초 동안 매 프레임 Z축으로 회전
+        float elapsed = 0f;
+        float waitTime = 0.5f;
+        while (elapsed < waitTime)
+        {
+            float dt = Time.deltaTime;
+            elapsed += dt;
+            transform.Rotate(0f, 0f, respawnRotationSpeed * dt);
+            yield return null;
+        }
+
+        // 위치 강제 이동 및 물리 상태 초기화
+        Vector2 respawnPos = Respawnpoint.position;
+        rb.position = respawnPos;
+        rb.linearVelocity = Vector2.zero;
+        transform.position = respawnPos;
+
+        // 입력/이동 벡터 초기화
+        input = Vector2.zero;
+        velocity = Vector2.zero;
+
+        // 회전 원상복구
+        transform.rotation = originalRotation;
+
+        isRespawning = false;
+        canMove = true;
+        isDash = false;
+        moveSpeed = normalSpeed;
+    }
+    public void RandomItem1()
+    {
+        int choice = Random.Range(0, 2); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 2; AddItem1(2);
+                break;
+            case 1:
+                Fruit2 += 2; AddItem2(2);
+                break;
+            case 2:
+                Fruit3 += 2; AddItem3(2);
+                break;
+        }
+        Wapple += 1; AddItem4(1);
+    }
+    public void RandomItem2()
+    {
+        int choice = Random.Range(0, 5); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 2; AddItem1(2);
+                break;
+            case 1:
+                Fruit2 += 2; AddItem2(2);
+                break;
+            case 2:
+                Fruit3 += 2; AddItem3(2);
+                break;
+            case 3:
+                Fruit1 += 3; AddItem1(3);
+                Fruit2 += 3; AddItem2(3);
+                break;
+            case 4:
+                Fruit1 += 3; AddItem1(3);
+                Fruit3 += 3; AddItem3(3);
+                break;
+            case 5:
+                Fruit2 += 3; AddItem2(3);
+                Fruit3 += 3; AddItem3(3);
+                break;
+        }
+        Wapple += 1; AddItem4(1);
+    }
+    public void RandomItem3()
+    {
+        int choice = Random.Range(0, 3); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 3; AddItem1(3);
+                Fruit2 += 2; AddItem2(2);
+                Fruit3 += 1; AddItem3(1);
+                break;
+            case 1:
+                Fruit1 += 1; AddItem1(1);
+                Fruit2 += 3; AddItem2(3);
+                Fruit3 += 2; AddItem3(2);
+                break;
+            case 2:
+                Fruit1 += 1; AddItem1(1);
+                Fruit2 += 2; AddItem2(2);
+                Fruit3 += 3; AddItem3(3);
+                break;
+            case 3:
+                Fruit1 += 3; AddItem1(3);
+                Fruit2 += 3; AddItem2(3);
+                Fruit3 += 3; AddItem3(3);
+                break;
+        }
+        Wapple += 1; AddItem4(1);
+    }
+    public void RandomItem4()
+    {
+        int choice = Random.Range(0, 2); //랜덤 변수 선정 값 증가
+        switch (choice)
+        {
+            case 0:
+                Fruit1 += 2; AddItem1(2);
+                Fruit2 += 2; AddItem2(2);
+                Fruit3 += 2; AddItem3(2);
+                break;
+            case 1:
+                Fruit1 += 4; AddItem1(4);
+                Fruit2 += 4; AddItem2(4);
+                Fruit3 += 4; AddItem3(4);
+                break;
+            case 2:
+                Fruit1 += 6; AddItem1(6);
+                Fruit2 += 6; AddItem2(6);
+                Fruit3 += 6; AddItem3(6);
+                break;
+        }
+        Wapple += 2; AddItem4(2);
+    }
+    public void AddItem1(int increase) // 아이템 ID 1의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem1: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem1: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 1)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 1 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem1: ItemID 1인 아이템을 찾지 못했습니다.");
+    }
+    public void AddItem2(int increase) // 아이템 ID 2의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem2: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem2: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 2)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 2 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem2: ItemID 2인 아이템을 찾지 못했습니다.");
+    }
+    public void AddItem3(int increase) // 아이템 ID 3의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem3: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem3: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 3)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 3 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem3: ItemID 3인 아이템을 찾지 못했습니다.");
+    }
+    public void AddItem4(int increase) // 아이템 ID 4의 개수를 증가시키는 함수
+    {
+        GameObject inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj == null)
+            Debug.LogWarning("AddItem4: Inventory 오브젝트를 찾을 수 없습니다.");
+
+        TestInventory testInv = inventoryObj.GetComponent<TestInventory>();
+        if (testInv == null)
+            Debug.LogWarning("AddItem4: Inventory 오브젝트에 TestInventory 컴포넌트가 없습니다.");
+
+        bool found = false;
+        foreach (var item in testInv.itemData)
+        {
+            if ((int)item.itemID == 4)
+            {
+                item.itemCount += increase;
+                Debug.Log($"ItemID 4 ({item.itemName})의 itemCount가 {increase} 증가.({item.itemCount})");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            Debug.LogWarning("AddItem4: ItemID 4인 아이템을 찾지 못했습니다.");
+    }
+}
